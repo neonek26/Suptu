@@ -34,7 +34,7 @@ Suptu provides two text formatting options: bold and italic. To format text as b
 ## LISTS
 Suptu supports unordered lists using hyphens (-) at the beginning of each line. Each hyphen indicates a list item. For example:
 
-`- Item 1
+- Item 1
 - Item 2
 - Item 3`
 
