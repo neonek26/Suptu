@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Suptu viewer/editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 800px;
+      margin: 0 auto;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .output {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Suptu viewer/editor</h1>
+    <textarea id="input" placeholder="Enter code here"></textarea>
+    <button id="translateBtn">Convert</button>
+    <div class="output">
+      <h2>Preview:</h2>
+      <div id="htmlOutput"></div>
+    </div>
+    <div class="output">
+      <h2>Raw HTML:</h2>
+      <textarea id="rawHTMLOutput" readonly></textarea>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code for the convertor
+    function translateMarkupToHTML(markup) {
+      const lines = markup.split('\n');
+      let html = '';
+
+      for (let line of lines) {
+        if (line.startsWith('=')) {
+          const headingLevel = line.match(/^=+/)[0].length;
+          const headingText = line.replace(/^=+/, '').trim();
+          html += `<h${headingLevel}>${headingText}</h${headingLevel}>\n`;
+        } else if (line.startsWith('#')) {
+          const boldText = line.replace(/#/g, '').trim();
+          html += `<strong>${boldText}</strong>\n`;
+        } else if (line.startsWith('%')) {
+          const italicText = line.replace(/%/g, '').trim();
+          html += `<em>${italicText}</em>\n`;
+        } else if (line.startsWith('-')) {
+          const listItem = line.replace(/^-/, '').trim();
+          html += `<li>${listItem}</li>\n`;
+        } else if (line.startsWith('"')) {
+          const linkText = line.substring(1, line.indexOf('"', 1)).trim();
+          const linkUrl = line.substring(line.indexOf('(', 1) + 1, line.indexOf(')')).trim();
+          html += `<a href="${linkUrl}">${linkText}</a>\n`;
+        } else if (line.startsWith('!')) {
+          const image = line.substring(1).trim();
+          html += `<img src="${image}" alt="">\n`;
+        } else {
+          html += line.trim() + '\n';
+        }
+      }
+
+      return html;
+    }
+
+    document.getElementById('translateBtn').addEventListener('click', function() {
+      const markup = document.getElementById('input').value;
+      const html = translateMarkupToHTML(markup);
+      document.getElementById('htmlOutput').innerHTML = html;
+      document.getElementById('rawHTMLOutput').value = html;
+    });
+  </script>
+</body>
+</html>
