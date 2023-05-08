@@ -17,8 +17,8 @@ Suptu is a lightweight markup language designed for simple and intuitive formatt
 ## HEADINGS
 Headings in Suptu are used to define different levels of section headings. The number of equal signs (=) at the beginning of a line determines the heading level. For example:
 
-`= Level 1 Heading
-== Level 2 Heading
+`= Level 1 Heading,
+== Level 2 Heading,
 === Level 3 Heading`
 
 ---
@@ -26,8 +26,9 @@ Headings in Suptu are used to define different levels of section headings. The n
 ## TEXT FORMATTING
 Suptu provides two text formatting options: bold and italic. To format text as bold, surround it with hashtags (#). To format text as italic, surround it with percentage signs (%). For example:
 
-`# Bold Text #
-% Italic Text %`
+`#Bold Text#
+and
+%Italic Text%`
 
 ---
 
