@@ -44,7 +44,7 @@ Suptu supports unordered lists using hyphens (-) at the beginning of each line. 
 ## LINKS
 To create a hyperlink in Suptu, use the following format: "link text"(link URL). Place the link text within double quotes and the URL within parentheses. For example:
 
-`"OpenAI Website"(https://openai.com)`
+`"Example Website"(https://examplewebsite.com)`
 
 ---
 
